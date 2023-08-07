@@ -1,0 +1,8 @@
+server:
+  port: 9001
+
+
+clientId: 95d1ef3cd3
+
+HASHING_ALGORITHM: HmacSHA256
+secretKeyYml: aa3f0257957add8b48caa8bd53d1b0
