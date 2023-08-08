@@ -1,5 +1,6 @@
 package com.neosoft.demopoc.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -7,7 +8,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class InstrumentDto {
     private String mobile_no;
     private String instrument_id;

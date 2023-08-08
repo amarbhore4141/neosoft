@@ -44,8 +44,8 @@ public class InquireServiceImpl implements InquireService {
         System.out.println("cas enquiry request dat in service layer"+casInquiryRequest);
         if((casInquiryRequest.getCustomerId()==null || casInquiryRequest.getCustomerType()==null ) && (casInquiryRequest.getInstrumentList() ==null || casInquiryRequest.getInstrumentType()==null))
             {
-                System.out.println("in the else condition");
-                throw new RecordCantBeRetrievedException("please provide both fields i.e. customer Id along with customer Type, OR Instrument List with Instrument type");
+
+                    throw new RecordCantBeRetrievedException("Please enter both required fields");
             }
 
         String apiUrl="https://cas.test-benefitpay.bh/benefit-cas/ext/v1/cas/iban-directories/inquire";

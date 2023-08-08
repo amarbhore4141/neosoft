@@ -35,7 +35,7 @@ public class CasInquiryRequest {
     private String alias;
     @Size(max = 10)
     private String corporateAlias;
-    private Boolean sijili;
+    private Sijili sijili;
 
     private int pageNo;
     private int pageSize;

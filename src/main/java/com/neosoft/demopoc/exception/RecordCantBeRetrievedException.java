@@ -1,8 +1,17 @@
 package com.neosoft.demopoc.exception;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
+@Getter
+@Setter
+@ToString
 public class RecordCantBeRetrievedException extends RuntimeException {
-    public RecordCantBeRetrievedException() {
-    }
+//    private int statusCode;
+//    private String errorMessage;
+
+
 
     public RecordCantBeRetrievedException(String s) {
         super(s);
@@ -19,4 +28,7 @@ public class RecordCantBeRetrievedException extends RuntimeException {
     public RecordCantBeRetrievedException(String s, Throwable throwable, boolean b, boolean b1) {
         super(s, throwable, b, b1);
     }
+
+
+
 }
