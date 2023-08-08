@@ -1,12 +1,12 @@
 package com.neosoft.demopoc.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import java.beans.Transient;
 import java.util.List;
 @Getter
 @Setter
@@ -21,6 +21,7 @@ public class ExternalApiRequest {
         private String instrument_type;
         private String alias;
         private String corporate_alias;
+        @JsonIgnore
         private boolean sijili;
         private int page_no;
         private int page_size;

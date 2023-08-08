@@ -6,5 +6,6 @@ import java.util.List;
 @Data
 public class Result {
     List<IBANDirectoryDataDto> result;
+    private MetaData metadata;
 }
 

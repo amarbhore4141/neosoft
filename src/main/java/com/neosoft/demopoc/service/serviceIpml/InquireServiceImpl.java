@@ -10,6 +10,7 @@ import com.neosoft.demopoc.service.InquireService;
 import com.neosoft.demopoc.service.PropertyReader;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -27,6 +28,7 @@ import java.util.Base64;
 @Service
 @AllArgsConstructor
 @NoArgsConstructor
+@Log4j2
 public class InquireServiceImpl implements InquireService {
 
     @Autowired
@@ -70,11 +72,13 @@ public class InquireServiceImpl implements InquireService {
 
         HttpEntity<String> requestEntity = new HttpEntity<>(jsonPayload,httpHeaders);
 
-        System.out.println("property reader values: "+propertyReader.toString());
-        System.out.println("Request Entity values passed :"+requestEntity.toString());
-        System.out.println("Json Payload data"+jsonPayload);
-        System.out.println("Request Entity:"+requestEntity);
+        log.info("property reader values: "+propertyReader.toString());
+        log.info("Request Entity values passed :"+requestEntity.toString());
+        log.info("Json Payload data"+jsonPayload);
+        log.info("Request Entity:"+requestEntity);
         ResponseEntity<DataExternalApiResponse> dataExternalApiResponse = restTemplate.exchange(apiUrl, HttpMethod.POST, requestEntity, DataExternalApiResponse.class);
+        String mr = String.valueOf(restTemplate.exchange(apiUrl, HttpMethod.POST, requestEntity,String.class));
+        log.info("String RESPONSE"+mr);
         DataExternalApiResponse dataExternalApiResponseBody=dataExternalApiResponse.getBody();
 
         System.out.println(dataExternalApiResponse);
