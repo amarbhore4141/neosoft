@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class SkillServiceImpl implements SkillService {
     @Autowired
@@ -32,5 +34,34 @@ public class SkillServiceImpl implements SkillService {
             msg="skill added successfully!";}
 
         return ResponseEntity.ok(msg);
+    }
+
+    @Override
+    public List<SkillsEntity> getALL() {
+        List<SkillsEntity> skillsEntityList=skillsRepository.findAll();
+
+        //System.out.println(skillsRepository.findAll());
+        return skillsEntityList;
+    }
+
+    @Override
+    public void deleteById(int skillID) {
+        if(skillsRepository.findById(skillID) == null ){
+            //return response with message skill not present
+        }else
+            skillsRepository.deleteById(skillID);
+        //return response
+
+    }
+
+    @Override
+    public void updateSkillsById(int skillID, String skillName) {
+        SkillsEntity skillsEntity=skillsRepository.findById(skillID).get();
+        if(skillsRepository.findById(skillID) == null){
+            //return response skill not found
+        }else
+            skillsEntity.setSkillName(skillName);
+            skillsRepository.save(skillsEntity);
+
     }
 }

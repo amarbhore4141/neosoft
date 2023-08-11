@@ -2,13 +2,16 @@ package com.example.crudJpa.entity;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Data
+@Getter
+@Setter
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class EmployeeEntity {
     @Id
@@ -21,9 +24,9 @@ public class EmployeeEntity {
     private List<AddressEntity> empAddressEntities = new ArrayList<>();
 
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.DETACH)
     private DepartmentEntity empDept;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.DETACH)
     private List<SkillsEntity> empSkills=new ArrayList<>();
 }

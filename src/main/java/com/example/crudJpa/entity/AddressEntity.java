@@ -1,5 +1,6 @@
 package com.example.crudJpa.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;
 import lombok.Setter;
@@ -20,5 +21,6 @@ public class AddressEntity {
     private long pincode;
     @ManyToOne
     @JoinColumn ( name = "empId")
+    @JsonIgnore
     private EmployeeEntity employee;
 }

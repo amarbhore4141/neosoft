@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Log4j2
 @Service
@@ -100,6 +101,27 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public void deleteEmployee(int empId) {
         employeeRepository.deleteById(empId);
+    }
+
+    @Override
+    public List<EmployeeEntity> showAll() {
+        List<EmployeeEntity> employeeEntityList =employeeRepository.findAll();
+        if (employeeEntityList == null){
+            //response as list is null with message
+            return employeeEntityList;
+        }else
+
+        return employeeEntityList;
+    }
+
+    @Override
+    public void updateEmployeeData(EmployeeDto employeeDto, int empId) {
+        EmployeeEntity employeeEntity=employeeRepository.findById(empId).get();
+        employeeEntity.setEmpName(employeeDto.getEmpName());
+       // employeeEntity.getEmpDept().setDeptName(employeeDto.getDepartmentDto().getDeptName());
+
+
+        employeeRepository.save(employeeEntity);
     }
 
 

@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class DeptSerrviceImpl implements DeptService {
     @Autowired
@@ -31,5 +33,34 @@ public class DeptSerrviceImpl implements DeptService {
             msg="dept added successfully!";}
 
         return ResponseEntity.ok(msg);
+    }
+
+    @Override
+    public  List<DepartmentEntity>  getAll() {
+
+        List<DepartmentEntity> departmentEntityList =departmentRepository.findAll();
+        return departmentEntityList;
+    }
+
+    @Override
+    public void deleteById(int deptId) {
+        if(departmentRepository.findById(deptId) != null){
+            departmentRepository.deleteById(deptId);
+        }else{
+            System.out.println("return response entity with message id not exist");
+        }
+
+    }
+
+    @Override
+    public void updateDept(int deptId, String deptName) {
+    DepartmentEntity departmentEntity= departmentRepository.findById(deptId).get();
+    if(departmentEntity != null){
+        departmentEntity.setDeptName(deptName);
+        departmentRepository.save(departmentEntity);
+    }
+    else{
+        System.out.println("return response entity with message id not exist");
+    }
     }
 }
