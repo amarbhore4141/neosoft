@@ -20,7 +20,7 @@ public class AddressEntity {
     private String state;
     private long pincode;
     @ManyToOne
-    @JoinColumn ( name = "empId")
+    @JoinColumn(name = "empId")
     @JsonIgnore
     private EmployeeEntity employee;
 }

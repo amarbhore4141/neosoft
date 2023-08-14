@@ -34,40 +34,40 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public void registerEmployee(EmployeeDto employee) {
-        String msg="";
+        String msg = "";
         System.out.println("inside register employee service");
         System.out.println(employee);
 
         // creating new empEntity
-      EmployeeEntity emp=new EmployeeEntity();
+        EmployeeEntity emp = new EmployeeEntity();
 
-      //setting empname
-      emp.setEmpName(employee.getEmpName());
+        //setting empname
+        emp.setEmpName(employee.getEmpName());
 
-      //finding if dept exist
-        DepartmentEntity dte=departmentRepository.findByDeptName(employee.getDepartmentDto().getDeptName());
+        //finding if dept exist
+        DepartmentEntity dte = departmentRepository.findByDeptName(employee.getDepartmentDto().getDeptName());
         //if exist ,then assign to employee
-        if(dte == null){
-             msg="Department Does't Exist";
-             log.debug("Department Does't Exist");
-             System.out.println("Department Does't Exist");
-        }else {
+        if (dte == null) {
+            msg = "Department Does't Exist";
+            log.debug("Department Does't Exist");
+            System.out.println("Department Does't Exist");
+        } else {
 
             emp.setEmpDept(dte);
             log.info("Dept assigned to employee");
-            msg="Dept assigned to employee";
+            msg = "Dept assigned to employee";
 
             //finding if skills are in skillRepository, if exist then add
-            List<SkillsDto> skillsPassed=employee.getSkillsDtos();
+            List<SkillsDto> skillsPassed = employee.getSkillsDtos();
             System.out.println(skillsPassed);
 
-            List<SkillsEntity> skillsToAdd=new ArrayList<>();
+            List<SkillsEntity> skillsToAdd = new ArrayList<>();
 
-            for(SkillsDto sdt:skillsPassed){
-                SkillsEntity skillsEntity=skillsRepository.findBySkillName(sdt.getSkillName());
-                if(skillsEntity == null){
-                    msg="skills you are trying to add are not present in database";
-                } else{
+            for (SkillsDto sdt : skillsPassed) {
+                SkillsEntity skillsEntity = skillsRepository.findBySkillName(sdt.getSkillName());
+                if (skillsEntity == null) {
+                    msg = "skills you are trying to add are not present in database";
+                } else {
                     skillsToAdd.add(skillsEntity);
                     System.out.println("Skill present: added successfully");
                 }
@@ -76,20 +76,19 @@ public class EmployeeServiceImpl implements EmployeeService {
             emp.setEmpSkills(skillsToAdd);
 
             //add addresses given
-          List<AddressDto> providedAddressList = employee.getAddressList();
-          List<AddressEntity> addressEntityToAdd =new ArrayList<>();
-          for(AddressDto adrs:providedAddressList)
-          {
-              AddressEntity address=new AddressEntity();
-              address.setAddressline1(adrs.getAddressline1());
-              address.setCity(adrs.getCity());
-              address.setState(adrs.getState());
-              address.setPincode(adrs.getPincode());
-              address.setEmployee(emp);
-              System.out.println(address);
-              addressEntityToAdd.add(address);
+            List<AddressDto> providedAddressList = employee.getAddressList();
+            List<AddressEntity> addressEntityToAdd = new ArrayList<>();
+            for (AddressDto adrs : providedAddressList) {
+                AddressEntity address = new AddressEntity();
+                address.setAddressline1(adrs.getAddressline1());
+                address.setCity(adrs.getCity());
+                address.setState(adrs.getState());
+                address.setPincode(adrs.getPincode());
+                address.setEmployee(emp);
+                System.out.println(address);
+                addressEntityToAdd.add(address);
 
-          }
+            }
             emp.setEmpAddressEntities(addressEntityToAdd);
             employeeRepository.save(emp);
 
@@ -105,20 +104,20 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public List<EmployeeEntity> showAll() {
-        List<EmployeeEntity> employeeEntityList =employeeRepository.findAll();
-        if (employeeEntityList == null){
+        List<EmployeeEntity> employeeEntityList = employeeRepository.findAll();
+        if (employeeEntityList == null) {
             //response as list is null with message
             return employeeEntityList;
-        }else
+        } else
 
-        return employeeEntityList;
+            return employeeEntityList;
     }
 
     @Override
     public void updateEmployeeData(EmployeeDto employeeDto, int empId) {
-        EmployeeEntity employeeEntity=employeeRepository.findById(empId).get();
+        EmployeeEntity employeeEntity = employeeRepository.findById(empId).get();
         employeeEntity.setEmpName(employeeDto.getEmpName());
-       // employeeEntity.getEmpDept().setDeptName(employeeDto.getDepartmentDto().getDeptName());
+        // employeeEntity.getEmpDept().setDeptName(employeeDto.getDepartmentDto().getDeptName());
 
 
         employeeRepository.save(employeeEntity);

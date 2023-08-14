@@ -19,29 +19,27 @@ public class EmployeeController {
     EmployeeService employeeService;
 
     @PostMapping("")
-    public String registerEmployee(@RequestBody @Valid EmployeeDto employee)
-        {
-            employeeService.registerEmployee(employee);
-            return "Employee Registered";
-        }
+    public String registerEmployee(@RequestBody @Valid EmployeeDto employee) {
+        employeeService.registerEmployee(employee);
+        return "Employee Registered";
+    }
 
-    @DeleteMapping ("/{empId}")
-    public String deleteEmployee(@PathVariable int empId)
-    {
+    @DeleteMapping("/{empId}")
+    public String deleteEmployee(@PathVariable int empId) {
         employeeService.deleteEmployee(empId);
         return "Employee Registered";
     }
 
     @GetMapping("")
-public List<EmployeeEntity> showAllEmployee(){
-        List<EmployeeEntity> employeeEntityList =employeeService.showAll();
+    public List<EmployeeEntity> showAllEmployee() {
+        List<EmployeeEntity> employeeEntityList = employeeService.showAll();
         return employeeEntityList;
-}
+    }
 
-@PutMapping("/{empId}")
-    public void updateEmployee(@PathVariable int empId,@RequestBody EmployeeDto employeeDto){
+    @PutMapping("/{empId}")
+    public void updateEmployee(@PathVariable int empId, @RequestBody EmployeeDto employeeDto) {
 
-        employeeService.updateEmployeeData(employeeDto,empId);
-}
+        employeeService.updateEmployeeData(employeeDto, empId);
+    }
 
 }

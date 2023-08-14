@@ -13,13 +13,13 @@ import java.util.List;
 @Setter
 @Entity
 public class SkillsEntity {
-      @Id
-      @GeneratedValue(strategy = GenerationType.IDENTITY)
-      private int skillID;
-      private String skillName;
-      @ManyToMany(mappedBy = "empSkills")
-      @JsonIgnore
-      private List<EmployeeEntity> employeeEntity;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int skillID;
+    private String skillName;
+    @ManyToMany(mappedBy = "empSkills")
+    @JsonIgnore
+    private List<EmployeeEntity> employeeEntity;
 
 
 }

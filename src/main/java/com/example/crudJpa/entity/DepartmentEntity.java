@@ -15,4 +15,4 @@ public class DepartmentEntity {
     private int deptId;
     private String deptName;
 
-   }
+}

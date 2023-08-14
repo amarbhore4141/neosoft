@@ -1,14 +1,15 @@
 package com.example.crudJpa.controller;
 
+
+import com.example.crudJpa.dto.AppResponse;
 import com.example.crudJpa.dto.DepartmentDto;
-import com.example.crudJpa.entity.DepartmentEntity;
 import com.example.crudJpa.service.DeptService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.List;
+
 
 @RestController
 @RequestMapping("api/v2/departments")
@@ -17,26 +18,26 @@ public class DepartmentController {
     DeptService deptService;
 
     @PostMapping("")
-    public ResponseEntity<String> addDepartment(@RequestBody @Valid DepartmentDto dept)
-    {
-        System.out.println("Inside dept controller: "+dept);
+    public ResponseEntity<AppResponse> addDepartment(@RequestBody @Valid DepartmentDto dept) {
+        System.out.println("Inside dept controller: " + dept);
+
         return deptService.addDept(dept);
     }
+
     @GetMapping("")
-    public List<DepartmentEntity>  getAllDepartments()
-    {
-        List<DepartmentEntity> departmentEntityList=deptService.getAll();
-        return departmentEntityList;
+    public ResponseEntity<AppResponse> getAllDepartments() {
+        return deptService.getAll();
     }
 
     @DeleteMapping("/{deptId}")
-    public void deleteDepartment(@PathVariable int deptId)
-    {
-        deptService.deleteById(deptId);
+    public ResponseEntity<AppResponse> deleteDepartment(@PathVariable int deptId) {
+        return deptService.deleteById(deptId);
     }
 
     @PutMapping("/{deptId}")
-    public void updateDepartment(@PathVariable int deptId,@RequestParam String deptName){
-        deptService.updateDept(deptId,deptName);
+    public ResponseEntity<AppResponse> updateDepartment(@PathVariable int deptId, @RequestParam String deptName) {
+        ResponseEntity<AppResponse> dtoResponseEntity = null;
+
+        return deptService.updateDept(deptId, deptName);
     }
 }

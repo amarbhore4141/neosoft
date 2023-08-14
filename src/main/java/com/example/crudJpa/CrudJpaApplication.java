@@ -8,9 +8,9 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 //@EnableJpaRepositories
 public class CrudJpaApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(CrudJpaApplication.class, args);
-		System.out.println("spring application started" + "");
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(CrudJpaApplication.class, args);
+        System.out.println("spring application started" + "");
+    }
 
 }

@@ -16,29 +16,29 @@ public class SkillServiceImpl implements SkillService {
     SkillsRepository skillsRepository;
 
     @Override
-    public ResponseEntity<String> addSkills(SkillsDto skills)
-    {
-        String msg="";
+    public ResponseEntity<String> addSkills(SkillsDto skills) {
+        String msg = "";
         System.out.println(skills);
-        SkillsEntity se=new SkillsEntity();
+        SkillsEntity se = new SkillsEntity();
 
-        SkillsEntity existingSkill=skillsRepository.findBySkillName(skills.getSkillName());
+        SkillsEntity existingSkill = skillsRepository.findBySkillName(skills.getSkillName());
 
-        if(existingSkill != null){
-            msg="Skills already present";
+        if (existingSkill != null) {
+            msg = "Skills already present";
 
-        }else {
-            SkillsEntity addNewSkill=new SkillsEntity();
+        } else {
+            SkillsEntity addNewSkill = new SkillsEntity();
             addNewSkill.setSkillName(skills.getSkillName().toUpperCase());
             skillsRepository.save(addNewSkill);
-            msg="skill added successfully!";}
+            msg = "skill added successfully!";
+        }
 
         return ResponseEntity.ok(msg);
     }
 
     @Override
     public List<SkillsEntity> getALL() {
-        List<SkillsEntity> skillsEntityList=skillsRepository.findAll();
+        List<SkillsEntity> skillsEntityList = skillsRepository.findAll();
 
         //System.out.println(skillsRepository.findAll());
         return skillsEntityList;
@@ -46,9 +46,9 @@ public class SkillServiceImpl implements SkillService {
 
     @Override
     public void deleteById(int skillID) {
-        if(skillsRepository.findById(skillID) == null ){
+        if (skillsRepository.findById(skillID) == null) {
             //return response with message skill not present
-        }else
+        } else
             skillsRepository.deleteById(skillID);
         //return response
 
@@ -56,12 +56,12 @@ public class SkillServiceImpl implements SkillService {
 
     @Override
     public void updateSkillsById(int skillID, String skillName) {
-        SkillsEntity skillsEntity=skillsRepository.findById(skillID).get();
-        if(skillsRepository.findById(skillID) == null){
+        SkillsEntity skillsEntity = skillsRepository.findById(skillID).get();
+        if (skillsRepository.findById(skillID) == null) {
             //return response skill not found
-        }else
+        } else
             skillsEntity.setSkillName(skillName);
-            skillsRepository.save(skillsEntity);
+        skillsRepository.save(skillsEntity);
 
     }
 }

@@ -28,5 +28,5 @@ public class EmployeeEntity {
     private DepartmentEntity empDept;
 
     @ManyToMany(cascade = CascadeType.DETACH)
-    private List<SkillsEntity> empSkills=new ArrayList<>();
+    private List<SkillsEntity> empSkills = new ArrayList<>();
 }
